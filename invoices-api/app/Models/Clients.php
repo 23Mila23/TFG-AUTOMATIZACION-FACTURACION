@@ -16,4 +16,8 @@ class Clients extends Model
         'city',
         'CIF',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    } 
 }

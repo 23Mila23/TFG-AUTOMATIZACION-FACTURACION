@@ -26,10 +26,9 @@ class ClientsController extends Controller
             'postalCode' => 'required|max:255',
             'city' => 'required|max:255',
             'CIF' => 'required|max:255',
-
         ]);
 
-        $client = Clients::create($fields);
+        $client = $request->user()->clients()->create($fields);
 
         return ['client' => $client];
     }
@@ -37,24 +36,36 @@ class ClientsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Clients $clients)
+    public function show(Clients $client)
     {
-        //
+        return ['client' => $client];
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Clients $clients)
+    public function update(Request $request, Clients $client)
     {
-        //
+        $fields = $request->validate([
+            'name' => 'required|max:255',
+            'adress' => 'required|max:255',
+            'postalCode' => 'required|max:255',
+            'city' => 'required|max:255',
+            'CIF' => 'required|max:255',
+        ]);
+
+        $client->update($fields);
+
+        return ['client' => $client];
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Clients $clients)
+    public function destroy(Clients $client)
     {
-        //
+        $client->delete();
+
+        return ['message' => 'The client was deleted'];
     }
 }
