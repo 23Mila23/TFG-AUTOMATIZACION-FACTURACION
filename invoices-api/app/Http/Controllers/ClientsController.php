@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Clients;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClientsController extends Controller
 {
@@ -46,6 +47,8 @@ class ClientsController extends Controller
      */
     public function update(Request $request, Clients $client)
     {
+        Gate::authorize('modify', $client);
+
         $fields = $request->validate([
             'name' => 'required|max:255',
             'adress' => 'required|max:255',
@@ -64,6 +67,7 @@ class ClientsController extends Controller
      */
     public function destroy(Clients $client)
     {
+        Gate::authorize('modify', $client);
         $client->delete();
 
         return ['message' => 'The client was deleted'];
