@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class InvoicesController extends Controller
 {
@@ -44,6 +45,7 @@ class InvoicesController extends Controller
      */
     public function update(Request $request, Invoices $invoice)
     {
+        Gate::authorize('modify', $invoice);
         $fields = $request->validate([
             'total' => 'required',
             'client_id' => 'required'
@@ -59,6 +61,7 @@ class InvoicesController extends Controller
      */
     public function destroy(Invoices $invoice)
     {
+        Gate::authorize('modify', $invoice);
         $invoice->delete();
         return ['message' => "The post was deleted"];
     }
