@@ -1,1 +1,22 @@
+header{
+    background-color: aliceblue;
+}
+
+.nav-home-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+.nav-link-container{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    gap: 25px;
+}
+
+.nav-link{
+    font-size: 30px;
+}
 
