@@ -25,6 +25,13 @@ a {
   color: inherit;
 }
 
+p{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  font-style: italic;
+}
+
 .header-container {
   display: flex;
   flex-direction: column;
@@ -49,6 +56,7 @@ a {
   padding: 20px;
   gap: 25px;
   color: var(--color-texo);
+  align-items: center;
 }
 
 .nav-link {

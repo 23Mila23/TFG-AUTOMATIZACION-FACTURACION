@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../Context/AppContext";
 
 export default function Register() {
+  const {setToken } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -25,8 +27,9 @@ export default function Register() {
     if (data.errors) {
       setErrors(data.errors);
     } else {
-      localStorage.setItem('token', data.token)
-      navigate("/main")
+      localStorage.setItem("token", data.token);
+      setToken(data.token);
+      navigate("/main");
       console.log(data);
     }
   }
@@ -70,9 +73,7 @@ export default function Register() {
                 type="password"
                 placeholder="Password"
                 value={formData.password}
-                onChange={(e) =>
-                  handleChange("password", e)
-                }
+                onChange={(e) => handleChange("password", e)}
               />
             </div>
             {errors.password ? (
