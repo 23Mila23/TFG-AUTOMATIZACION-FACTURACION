@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,6 +25,8 @@ export default function Register() {
     if (data.errors) {
       setErrors(data.errors);
     } else {
+      localStorage.setItem('token', data.token)
+      navigate("/main")
       console.log(data);
     }
   }
