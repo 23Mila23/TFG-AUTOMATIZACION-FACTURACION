@@ -7,6 +7,8 @@ import Login from "./Pages/Auth/Login";
 import Main from "./Pages/Main";
 import { AppContext } from "./Context/AppContext";
 import React, { useContext } from "react";
+import Clients from "./Pages/Clients";
+import Invoices from "./Pages/Invoices";
 
 export default function App() {
 
@@ -20,6 +22,8 @@ export default function App() {
           <Route path="/register" element={user ? <Main/> : <Register />} />
           <Route path="/login" element={user ? <Main/> : <Login />} />
           <Route path="/main" element={user ? <Main/> : <Home/>} />
+          <Route path="/clients" element={<Clients/>} />
+          <Route path="/invoices" element={<Invoices/>} />
 
         </Route>
       </Routes>

@@ -47,7 +47,7 @@ export default function Layout() {
                 <p className="text-header">Welcome {user.name} </p>
                 </div>
               <form onSubmit={handleLogout}>
-                <button className="nav-link">Logout</button>
+                <button className="button-17">Logout</button>
               </form>
             </div>
           ) : (
