@@ -11,9 +11,9 @@ class ClientsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Clients::all();
+        return $request->user()->clients()->get();
     }
 
     /**
