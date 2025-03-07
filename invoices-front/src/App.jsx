@@ -6,9 +6,10 @@ import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
 import Main from "./Pages/Main";
 import { AppContext } from "./Context/AppContext";
-import React, { useContext } from "react";
-import Clients from "./Pages/Clients";
+import React, { use, useContext } from "react";
+import Clients from "./Pages/Auth/Clients/Clients";
 import Invoices from "./Pages/Invoices";
+import CreateClient from "./Pages/Auth/Clients/CreateClient";
 
 export default function App() {
 
@@ -22,7 +23,8 @@ export default function App() {
           <Route path="/register" element={user ? <Main/> : <Register />} />
           <Route path="/login" element={user ? <Main/> : <Login />} />
           <Route path="/main" element={user ? <Main/> : <Home/>} />
-          <Route path="/clients" element={<Clients/>} />
+          <Route path="/clients" element={user ? <Clients/> : <Home/>} />
+          <Route path="/createclient" element={user ? <CreateClient/> : <Home/>} />
           <Route path="/invoices" element={<Invoices/>} />
 
         </Route>
