@@ -4,7 +4,7 @@ export const AppContext = createContext();
 
 export default function AppProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
   async function getUser() {
     const res = await fetch("/api/user", {
@@ -13,9 +13,10 @@ export default function AppProvider({ children }) {
       },
     });
     const data = await res.json();
-    setUser(data);
-
     console.log(data);
+    if(res.ok){
+      setUser(data);
+    }
   }
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function AppProvider({ children }) {
   }, [token]);
 
   return (
-    <AppContext.Provider value={{ token, setToken, user }}>
+    <AppContext.Provider value={{ token, setToken, user, setUser }}>
       {children}
     </AppContext.Provider>
   );

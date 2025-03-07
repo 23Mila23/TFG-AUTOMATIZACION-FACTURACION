@@ -2,35 +2,33 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 
-export default function Register() {
+export default function Login() {
   const {setToken } = useContext(AppContext);
 
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
-    password_confirmation: "",
   });
 
   const [errors, setErrors] = useState({});
 
-  async function handleRegister(e) {
+  async function handleLogin(e) {
     e.preventDefault();
-    const res = await fetch("/api/register", {
+    const res = await fetch("/api/login", {
       method: "post",
       body: JSON.stringify(formData),
     });
 
     const data = await res.json();
+
     if (data.errors) {
       setErrors(data.errors);
     } else {
       localStorage.setItem("token", data.token);
       setToken(data.token);
       navigate("/main");
-      console.log(data);
     }
   }
   const handleChange = (field, e) => {
@@ -40,21 +38,9 @@ export default function Register() {
   return (
     <>
       <div className="form-container">
-        <div className="form">
-          <div className="form-title">Registro</div>
-          <form onSubmit={handleRegister}>
-            <div className="input-container ic1">
-              <input
-                className="input"
-                type="text"
-                placeholder="Name"
-                value={formData.name}
-                onChange={(e) => {
-                  handleChange("name", e);
-                }}
-              />
-            </div>
-            {errors.name ? <p className="error">{errors.name[0]}</p> : ""}
+        <div className="form__login">
+          <div className="form-title">Login to your account</div>
+          <form onSubmit={handleLogin}>
             <div className="input-container ic2">
               <input
                 className="input"
@@ -81,21 +67,7 @@ export default function Register() {
             ) : (
               ""
             )}
-            <div className="input-container ic2">
-              <input
-                className="input"
-                type="password"
-                placeholder="Password Confirmation"
-                value={formData.password_confirmation}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    password_confirmation: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <button className="submit">submit</button>
+            <button className="submit">Login</button>
           </form>
         </div>
       </div>

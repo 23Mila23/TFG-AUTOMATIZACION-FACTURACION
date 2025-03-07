@@ -30,7 +30,6 @@ export default function Register() {
       localStorage.setItem("token", data.token);
       setToken(data.token);
       navigate("/main");
-      console.log(data);
     }
   }
   const handleChange = (field, e) => {
