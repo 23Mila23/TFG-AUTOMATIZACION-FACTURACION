@@ -3,7 +3,7 @@ import { AppContext } from "../../Context/AppContext";
 import { Link } from "react-router-dom";
 
 export default function ClientsMain() {
-  const { token, user } = useContext(AppContext);
+  const { token } = useContext(AppContext);
   const [clients, setClients] = useState([]);
 
   async function getClients() {
@@ -42,7 +42,7 @@ export default function ClientsMain() {
                   </p>
                   <p>{client.city}</p>
                   <p>{new Date(client.created_at).toLocaleDateString()}</p>
-                  <Link to={`/clients/${client.id}`} className="button-17 clientListButton">Edit</Link>
+                  <Link to={`/clients/edit/${client.id}`} className="button-17 clientListButton">Edit</Link>
                 </div>
               </div>
             </div>

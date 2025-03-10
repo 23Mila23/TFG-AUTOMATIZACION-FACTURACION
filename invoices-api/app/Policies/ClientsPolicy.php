@@ -11,6 +11,6 @@ class ClientsPolicy
    
     public function modify(User $user, Clients $client): Response
     {
-        return $user->id === $client->user_id ? Response::allow() : Response::deny('You do not own this post');
+        return $user->id === $client->user_id ? Response::allow() : Response::deny('You do not have access');
     }
 }

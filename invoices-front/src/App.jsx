@@ -10,6 +10,7 @@ import React, { use, useContext } from "react";
 import Invoices from "./Pages/Invoices";
 import Clients from "./Pages/Clients/Clients";
 import CreateClient from "./Pages/Clients/CreateClient";
+import Edit from "./Pages/Clients/EditClient";
 
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/main" element={user ? <Main/> : <Home/>} />
           <Route path="/clients" element={user ? <Clients/> : <Home/>} />
           <Route path="/createclient" element={user ? <CreateClient/> : <Home/>} />
+          <Route path="/clients/edit/:id" element={user ? <Edit/> : <Home/>} />
           <Route path="/invoices" element={<Invoices/>} />
 
         </Route>
