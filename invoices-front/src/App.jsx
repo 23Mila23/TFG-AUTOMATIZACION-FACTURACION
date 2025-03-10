@@ -7,9 +7,10 @@ import Login from "./Pages/Auth/Login";
 import Main from "./Pages/Main";
 import { AppContext } from "./Context/AppContext";
 import React, { use, useContext } from "react";
-import Clients from "./Pages/Auth/Clients/Clients";
 import Invoices from "./Pages/Invoices";
-import CreateClient from "./Pages/Auth/Clients/CreateClient";
+import Clients from "./Pages/Clients/Clients";
+import CreateClient from "./Pages/Clients/CreateClient";
+
 
 export default function App() {
 
