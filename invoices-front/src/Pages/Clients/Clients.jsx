@@ -3,7 +3,7 @@ import { AppContext } from "../../Context/AppContext";
 import { Link } from "react-router-dom";
 
 export default function ClientsMain() {
-  const { token } = useContext(AppContext);
+  const { token, } = useContext(AppContext);
   const [clients, setClients] = useState([]);
 
   async function getClients() {
@@ -16,6 +16,21 @@ export default function ClientsMain() {
     if (res.ok) {
       setClients(data);
     }
+  }
+  async function handleDelete(id){
+    const res = await fetch(`api/clients/${id}`,{
+      method: 'delete',
+      headers:{
+        Authorization: `Bearer ${token}`,
+      }
+    });
+    const data = await res.json();
+    if(res.ok){
+      setClients(clients.filter((client) => {
+        return client.id != id;
+      }))
+    }
+    console.log(data);
   }
   useEffect(() => {
     getClients();
@@ -38,11 +53,12 @@ export default function ClientsMain() {
               <div>
                 <div className="clientList-container">
                   <p>
-                    <strong>{client.name}</strong>{" "}
+                    <strong>{client.name}</strong>
                   </p>
                   <p>{client.city}</p>
                   <p>{new Date(client.created_at).toLocaleDateString()}</p>
                   <Link to={`/clients/edit/${client.id}`} className="button-17 clientListButton">Edit</Link>
+                    <button onClick={() => handleDelete(client.id)} className="button-17 clientListButton">Delete</button>
                 </div>
               </div>
             </div>
