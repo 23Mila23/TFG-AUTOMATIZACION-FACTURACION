@@ -63,6 +63,6 @@ class InvoicesController extends Controller
     {
         Gate::authorize('modify', $invoice);
         $invoice->delete();
-        return ['message' => "The post was deleted"];
+        return ['message' => "The invoice was deleted"];
     }
 }

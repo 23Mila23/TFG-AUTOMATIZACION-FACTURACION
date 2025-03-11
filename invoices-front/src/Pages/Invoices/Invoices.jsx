@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function InvoicesMain() {
   const { token } = useContext(AppContext);
   const [invoices, setInvoices] = useState([]);
-  const []
+  const [clients, setClients] = useState([]);
   const navigate = useNavigate();
 
   async function getInvoices() {
@@ -17,6 +17,24 @@ export default function InvoicesMain() {
     const data = await res.json();
     if (res.ok) {
       setInvoices(data);
+      getClients(data);
+    }
+  }
+
+  async function getClients(){
+    const res = await fetch("api/clients", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    const clientsData = await res.json();
+    if(res.ok){
+      const clientsMap = clientsData.reduce((acc,client) => {
+        acc[client.id] = client.name;
+        return acc;
+      }, {});
+      setClients(clientsMap);
     }
   }
   async function handleDelete(id) {
@@ -58,7 +76,7 @@ export default function InvoicesMain() {
                   <p>
                     <strong>Invoice Number: {invoice.id}</strong>
                   </p>
-                  <p>Client: {invoice.client_id}</p>
+                  <p>Client: {clients[invoice.client_id]}</p>
                   <p>Total Amount: {invoice.total}</p>
                   <p>{new Date(invoice.created_at).toLocaleDateString()}</p>
                   <Link
