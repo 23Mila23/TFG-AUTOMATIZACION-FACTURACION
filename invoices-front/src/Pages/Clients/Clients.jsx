@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ClientsMain() {
   const { token, } = useContext(AppContext);
   const [clients, setClients] = useState([]);
+  const navigate = useNavigate();
 
   async function getClients() {
     const res = await fetch("api/clients", {
@@ -38,14 +39,11 @@ export default function ClientsMain() {
   return (
     <>
       <div>
-        <div>
-          <form action="/createclient" className="create-client-button-container">
-            <input
+        <div className="create-client-button-container">
+            <button
               className="button-17"
-              type="submit"
-              value="Create Client"
-            />
-          </form>
+              onClick={()=>navigate("/createclient")}
+            >Create Client</button>
         </div>
         {clients.length > 0 ? (
           clients.map((client) => (

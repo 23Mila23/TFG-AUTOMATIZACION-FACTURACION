@@ -39,7 +39,7 @@ export default function InvoicesMain() {
     <>
       <div>
         <div>
-          <form action="/createclient" className="create-client-button-container">
+          <form action="/createinvoice" className="create-client-button-container">
             <input
               className="button-17"
               type="submit"

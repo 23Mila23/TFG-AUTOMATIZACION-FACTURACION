@@ -20,7 +20,8 @@ export default function AppProvider({ children }) {
   }
 
   useEffect(() => {
-    if (token) {
+    console.log(token,user)
+    if (token && !user) {
       getUser();
     }
   }, [token]);

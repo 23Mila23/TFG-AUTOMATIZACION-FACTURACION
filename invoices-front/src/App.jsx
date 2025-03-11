@@ -11,10 +11,10 @@ import Invoices from "./Pages/Invoices/Invoices";
 import Clients from "./Pages/Clients/Clients";
 import CreateClient from "./Pages/Clients/CreateClient";
 import Edit from "./Pages/Clients/EditClient";
+import CreateInvoice from "./Pages/Invoices/CreateInvoice";
 
 
 export default function App() {
-
   const {user} = useContext(AppContext)
   return (
     <BrowserRouter>
@@ -29,6 +29,7 @@ export default function App() {
           <Route path="/createclient" element={user ? <CreateClient/> : <Home/>} />
           <Route path="/clients/edit/:id" element={user ? <Edit/> : <Home/>} />
           <Route path="/invoices" element={<Invoices/>} />
+          <Route path="/createinvoice" element={user ? <CreateInvoice/> : <Home/>} />
 
         </Route>
       </Routes>
