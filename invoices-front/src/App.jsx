@@ -6,7 +6,7 @@ import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
 import Main from "./Pages/Main";
 import { AppContext } from "./Context/AppContext";
-import React, { use, useContext } from "react";
+import React, {useContext } from "react";
 import Invoices from "./Pages/Invoices/Invoices";
 import Clients from "./Pages/Clients/Clients";
 import CreateClient from "./Pages/Clients/CreateClient";

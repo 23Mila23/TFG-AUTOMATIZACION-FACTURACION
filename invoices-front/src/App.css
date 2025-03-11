@@ -208,6 +208,18 @@ height: 30px;
   width: 50%;
 }
 
+.form__createInvoice {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-evenly ;
+  background-color: var(--color-primario);
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: 440px;
+  padding: 20px;
+  width: 50%;
+}
+
 .form-title {
   color: var(--color-texo);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
