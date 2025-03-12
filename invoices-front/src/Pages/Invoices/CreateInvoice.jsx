@@ -48,6 +48,7 @@ export default function CreateInvoice() {
                 onClientSelect={(id) =>
                   setFormData({ ...formData, client_id: id })
                 }
+                selectedClientId={formData.client_id}
               />
             </div>
             {errors.client_id ? (
