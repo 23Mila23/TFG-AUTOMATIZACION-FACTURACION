@@ -2,17 +2,19 @@ import { useContext, useEffect, useState } from "react";
 import Select from "react-select";
 import { AppContext } from "../Context/AppContext";
 
-export default function SelectClient({onClientSelect}) {
+export default function SelectClient({onClientSelect, selectedClientId}) {
   const { token } = useContext(AppContext);
   const [clients, setClients] = useState([]);
 
   async function getClients() {
-    const res = await fetch("api/clients", {
+    const res = await fetch("/api/clients", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     const data = await res.json();
+    console.log("Clientes recibidos:", data);
+
     const clientsResult = data.map((client) => ({
       label: client.name,
       value: client.id,
@@ -22,9 +24,7 @@ export default function SelectClient({onClientSelect}) {
     }
   }
 
-  const handleSelectChange = ({value}) => {
-    onClientSelect(value);
-  };
+  const selectedClient = clients.find(client => client.value === selectedClientId) || null;
 
   useEffect(() => {
     getClients();
@@ -32,7 +32,7 @@ export default function SelectClient({onClientSelect}) {
   return (
     <div>
         
-      <Select defaultValue={{label: 'Select a client'}} options={clients} onChange={handleSelectChange} />;
+      <Select  options={clients} onChange={(option) => onClientSelect(option.value)} value={selectedClient} />
     </div>
   );
 }

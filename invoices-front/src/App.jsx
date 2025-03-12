@@ -12,6 +12,7 @@ import Clients from "./Pages/Clients/Clients";
 import CreateClient from "./Pages/Clients/CreateClient";
 import Edit from "./Pages/Clients/EditClient";
 import CreateInvoice from "./Pages/Invoices/CreateInvoice";
+import EditInvoice from "./Pages/Invoices/EditInvoice";
 
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/clients/edit/:id" element={user ? <Edit/> : <Home/>} />
           <Route path="/invoices" element={<Invoices/>} />
           <Route path="/createinvoice" element={user ? <CreateInvoice/> : <Home/>} />
+          <Route path="/invoices/edit/:id" element={user ? <EditInvoice/> : <Home/>} />
 
         </Route>
       </Routes>

@@ -80,7 +80,7 @@ export default function InvoicesMain() {
                   <p>Total Amount: {invoice.total}</p>
                   <p>{new Date(invoice.created_at).toLocaleDateString()}</p>
                   <Link
-                    to={`/clients/edit/${invoice.id}`}
+                    to={`/invoices/edit/${invoice.id}`}
                     className="button-17 clientListButton"
                   >
                     Edit
