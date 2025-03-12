@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
+import {PDFDocument, rgb, StandardFonts } from "pdf-lib";
+import download from "downloadjs";
 
 export default function InvoicesMain() {
   const { token } = useContext(AppContext);
@@ -21,22 +23,19 @@ export default function InvoicesMain() {
     }
   }
 
-  async function getClients(){
+  async function getClients() {
     const res = await fetch("api/clients", {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     const clientsData = await res.json();
-    if(res.ok){
-      const clientsMap = clientsData.reduce((acc,client) => {
-        acc[client.id] = client.name;
-        return acc;
-      }, {});
-      setClients(clientsMap);
+    if (res.ok) {
+      setClients(clientsData);
     }
   }
+
   async function handleDelete(id) {
     const res = await fetch(`api/invoices/${id}`, {
       method: "delete",
@@ -54,6 +53,90 @@ export default function InvoicesMain() {
     }
     console.log(data);
   }
+
+  const handleDownload = async (invoice) => {
+    const client = findClientDataById(invoice.client_id);
+    const date = new Date(invoice.created_at).toLocaleDateString("es-ES");
+    const existingPdfBytes = await fetch("plantilla.pdf").then((res) =>
+      res.arrayBuffer()
+    );
+    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+    const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+    const pages = pdfDoc.getPages();
+    const firstPage = pages[0];
+
+    firstPage.drawText(`${invoice.id}`, {
+      x: 120,
+      y: 748,
+      size: 12,
+      font: helveticaFont,
+      color: rgb(0,0,0),
+    });
+
+    firstPage.drawText(`${date}`, {
+      x: 120,
+      y: 721,
+      size: 12,
+      font: helveticaFont,
+      color: rgb(0,0,0),
+    });
+
+    firstPage.drawText(`${client.name}`, {
+      x: 350,
+      y: 720,
+      size: 12,
+      font: helveticaFont,
+      color: rgb(0,0,0),
+    });
+    firstPage.drawText(`${client.adress}`, {
+      x: 350,
+      y: 707,
+      size: 12,
+      font: helveticaFont,
+      color: rgb(0,0,0),
+    });
+
+    firstPage.drawText(`${client.postalCode}`, {
+      x: 350,
+      y: 695,
+      size: 12,
+      font: helveticaFont,
+      color: rgb(0,0,0),
+    });
+
+    firstPage.drawText(`${client.city}`, {
+      x: 350,
+      y: 683,
+      size: 12,
+      font: helveticaFont,
+      color: rgb(0,0,0),
+    });
+    firstPage.drawText(`${client.CIF}`, {
+      x: 350,
+      y: 670,
+      size: 12,
+      font: helveticaFont,
+      color: rgb(0,0,0),
+    });
+    firstPage.drawText(`${invoice.total}€`, {
+      x: 515,
+      y: 107,
+      size: 12,
+      font: helveticaFont,
+      color: rgb(0,0,0),
+    });
+
+    const pdfBytes = await pdfDoc.save();
+    download(pdfBytes, "pdf-lib_modification_example.pdf", "application/pdf");
+  };
+
+  const findClientDataById = (id) => {
+    return clients.find((client) => {
+      return client.id == id;
+    });
+  };
+
   useEffect(() => {
     getInvoices();
   }, []);
@@ -76,7 +159,7 @@ export default function InvoicesMain() {
                   <p>
                     <strong>Invoice Number: {invoice.id}</strong>
                   </p>
-                  <p>Client: {clients[invoice.client_id]}</p>
+                  <p>Client: {findClientDataById(invoice.client_id)?.name}</p>
                   <p>Total Amount: {invoice.total}</p>
                   <p>{new Date(invoice.created_at).toLocaleDateString()}</p>
                   <Link
@@ -85,6 +168,12 @@ export default function InvoicesMain() {
                   >
                     Edit
                   </Link>
+                  <button
+                    className="button-17 clientListButton"
+                    onClick={() => handleDownload(invoice)}
+                  >
+                    Download
+                  </button>
                   <button
                     onClick={() => handleDelete(invoice.id)}
                     className="button-17 clientListButton"
