@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 
 export default function Register() {
-  const {setToken } = useContext(AppContext);
+  const { setToken } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -39,62 +39,68 @@ export default function Register() {
   return (
     <>
       <div className="form-container">
-        <div className="form">
+        <div className={`form ${Object.keys(errors).length > 0 ?  "form-errors-expanded" : ""}`}>
           <div className="form-title">Registro</div>
-          <form onSubmit={handleRegister}>
-            <div className="input-container ic1">
-              <input
-                className="input"
-                type="text"
-                placeholder="Name"
-                value={formData.name}
-                onChange={(e) => {
-                  handleChange("name", e);
-                }}
-              />
+          <form className="form-inputs-container" onSubmit={handleRegister}>
+            <div>
+              <div className="input-container ic1">
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={(e) => {
+                    handleChange("name", e);
+                  }}
+                />
+              </div>
+              {errors.name ? <p className="error">{errors.name[0]}</p> : ""}
+              <div className="input-container ic2">
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={(e) => {
+                    handleChange("email", e);
+                  }}
+                />
+              </div>
+              {errors.email ? <p className="error">{errors.email[0]}</p> : ""}
+              <div className="input-container ic2">
+                <input
+                  className="input"
+                  type="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={(e) => handleChange("password", e)}
+                />
+              </div>
+              {errors.password ? (
+                <p className="error">{errors.password[0]}</p>
+              ) : (
+                ""
+              )}
+              <div className="input-container ic2">
+                <input
+                  className="input"
+                  type="password"
+                  placeholder="Password Confirmation"
+                  value={formData.password_confirmation}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      password_confirmation: e.target.value,
+                    })
+                  }
+                />
+              </div>
             </div>
-            {errors.name ? <p className="error">{errors.name[0]}</p> : ""}
-            <div className="input-container ic2">
-              <input
-                className="input"
-                type="text"
-                placeholder="Email"
-                value={formData.email}
-                onChange={(e) => {
-                  handleChange("email", e);
-                }}
-              />
+            <div className="form-btn-container">
+              <button className="btn form-btn btn-white btn-animated">
+                Submit
+              </button>
             </div>
-            {errors.email ? <p className="error">{errors.email[0]}</p> : ""}
-            <div className="input-container ic2">
-              <input
-                className="input"
-                type="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={(e) => handleChange("password", e)}
-              />
-            </div>
-            {errors.password ? (
-              <p className="error">{errors.password[0]}</p>
-            ) : (
-              ""
-            )}
-            <div className="input-container ic2">
-              <input
-                className="input"
-                type="password"
-                placeholder="Password Confirmation"
-                value={formData.password_confirmation}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    password_confirmation: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <button className="submit">submit</button>
           </form>
         </div>
       </div>

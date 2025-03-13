@@ -42,7 +42,7 @@ export default function CreateInvoice() {
       <div className="form-container">
         <div className="form__createInvoice">
           <div className="form-title">New Invoice</div>
-          <form onSubmit={handleCreateInvoice}>
+          <form className="form-container" onSubmit={handleCreateInvoice}>
             <div className="input-container ic2">
               <SelectClient
                 onClientSelect={(id) =>

@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 
 export default function Layout() {
   const { user, token, setUser, setToken } = useContext(AppContext);
   const navigate = useNavigate();
+  const locationLogin = useLocation();
 
   async function handleLogout(e) {
     e.preventDefault();
@@ -31,7 +33,7 @@ export default function Layout() {
     <>
       <div className="container">
         {user ? (
-          <header class="header">
+          <header className="header">
             <div className="header-container">
               <div>
                 <div class="brand-box">
@@ -44,31 +46,37 @@ export default function Layout() {
                 </div>
               </div>
 
-              <div class="text-box">
-                <h1 class="heading-primary">
-                  <span class="heading-primary-main">INVOSync</span>
-                  <span class="heading-primary-sub">Invoice Automation</span>
+              <div className="text-box">
+                <h1 className="heading-primary">
+                  <span className="heading-primary-main">INVOSync</span>
+                  <span className="heading-primary-sub">
+                    Invoice Automation
+                  </span>
                 </h1>
-                <a href="/main" class="btn btn-white btn-animated">
+                <a href="/main" className="btn btn-white btn-animated">
                   Home
                 </a>
               </div>
             </div>
           </header>
         ) : (
-          <header class="header">
+          <header className="header">
             <div className="header-container">
-                <div class="brand-box">
+              <div className="brand-box">
+                {locationLogin.pathname !== "/login" && (
                   <a href="/login" class="btn btn-white btn-animated">
                     Login
                   </a>
-                </div>
-              <div class="text-box">
-                <h1 class="heading-primary">
-                  <span class="heading-primary-main">INVOSync</span>
-                  <span class="heading-primary-sub">Invoice Automation</span>
+                )}
+              </div>
+              <div className="text-box">
+                <h1 className="heading-primary">
+                  <span className="heading-primary-main">INVOSync</span>
+                  <span className="heading-primary-sub">
+                    Invoice Automation
+                  </span>
                 </h1>
-                <a href="/" class="btn btn-white btn-animated">
+                <a href="/" className="btn btn-white btn-animated">
                   Home
                 </a>
               </div>
