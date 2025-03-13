@@ -29,48 +29,56 @@ export default function Layout() {
   }
   return (
     <>
-      <header>
-        <div className="header-container">
-          {user ? (
-            <div className="nav-home-container">
+      <div className="container">
+        {user ? (
+          <header class="header">
+            <div className="header-container">
               <div>
-                <nav className="nav-link">
-                  <Link to="/main">Home</Link>
-                </nav>
+                <div class="brand-box">
+                  <button
+                    onClick={handleLogout}
+                    className="btn btn-white btn-animated"
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="nav-home-container">
-              <div>
-                <nav className="nav-link">
-                  <Link to="/">Home</Link>
-                </nav>
-              </div>
-            </div>
-          )}
 
-          {user ? (
-            <div className="nav-link-container">
-              <div>
-                <p className="text-header">Welcome {user.name} </p>
+              <div class="text-box">
+                <h1 class="heading-primary">
+                  <span class="heading-primary-main">INVOSync</span>
+                  <span class="heading-primary-sub">Invoice Automation</span>
+                </h1>
+                <a href="/main" class="btn btn-white btn-animated">
+                  Home
+                </a>
               </div>
-              <form onSubmit={handleLogout}>
-                <button className="button-17">Logout</button>
-              </form>
             </div>
-          ) : (
-            <div className="nav-link-container">
-              <nav className="nav-link">
-                <Link to="/login">Login</Link>
-              </nav>
+          </header>
+        ) : (
+          <header class="header">
+            <div className="header-container">
+                <div class="brand-box">
+                  <a href="/login" class="btn btn-white btn-animated">
+                    Login
+                  </a>
+                </div>
+              <div class="text-box">
+                <h1 class="heading-primary">
+                  <span class="heading-primary-main">INVOSync</span>
+                  <span class="heading-primary-sub">Invoice Automation</span>
+                </h1>
+                <a href="/" class="btn btn-white btn-animated">
+                  Home
+                </a>
+              </div>
             </div>
-          )}
-        </div>
-      </header>
-
-      <main>
-        <Outlet />
-      </main>
+          </header>
+        )}
+        <main className="main">
+          <Outlet />
+        </main>
+      </div>
     </>
   );
 }

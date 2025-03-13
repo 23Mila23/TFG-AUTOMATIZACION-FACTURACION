@@ -1,20 +1,21 @@
-
-
 export default function Home() {
   return (
     <>
-      <div className="home-container">
-        <div>
-          <h1 className="title">Welcome</h1>
+      <section class="cards-home-wrapper">
+        <div class="card-grid-space">
+          <a class="card" href="">
+            <div>
+              <h1>Register</h1>
+              <p>Start automating your business</p>
+              <div class="tags">
+                <form action="/register">
+                  <input className="tag" type="submit" value="Register" />
+                </form>
+              </div>
+            </div>
+          </a>
         </div>
-        <div className="home-registro-container">
-          <div>
-            <form action="/register">
-              <input className="button-17" type="submit" value="Register" />
-            </form>
-          </div>
-        </div>
-      </div>
+      </section>
     </>
   );
 }
