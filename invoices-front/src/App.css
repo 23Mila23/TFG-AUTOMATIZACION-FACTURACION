@@ -617,6 +617,13 @@ a {
   .form__createClient{
     width: 75%;
   }
+
+  .clientList-container {
+    width: 95%; 
+    margin: 10px auto; 
+    padding: 10px;
+    gap: 15px;
+  }
 }
 
 @media screen and (max-width: 780px) {
@@ -641,6 +648,8 @@ a {
   .form__createClient{
     width: 95%;
   }
+
+ 
 }
 
 @media screen and (max-width: 480px) {
@@ -691,6 +700,27 @@ a {
   .form__createClient{
     width: 100%;
   }
+
+  .clientList-container {
+    width: 90%; 
+    gap: 0px;
+  }
+  .list-elements-large{
+    font-size: 15px;
+    flex: 0;
+  }
+  .list-elements{
+    flex: 0;
+    font-size: 15px;
+  }
+  .list-elements a{
+    width: 65px;
+    font-size: 12px;
+  }
+  .list-elements button{
+    font-size: 12px;
+    width: 72px;
+  }
 }
 
 @media screen and (max-width: 375px) {
@@ -700,7 +730,28 @@ a {
   }
   .info h1 {
     margin: 0;
-  } }
+  }
+
+  .clientList-container {
+    width: 95%; 
+  }
+
+  .list-elements-large{
+    font-size: 12px;
+  }
+  .list-elements{
+    font-size: 12px;
+  }
+  .list-elements a{
+    width: 65px;
+    font-size: 12px;
+  }
+  .list-elements button{
+    font-size: 12px;
+    width: 72px;
+  }
+
+}
 
   @media screen and (max-width: 360px) {
     .info {
