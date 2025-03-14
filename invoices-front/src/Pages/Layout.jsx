@@ -53,9 +53,12 @@ export default function Layout() {
                     Invoice Automation
                   </span>
                 </h1>
-                <a href="/main" className="btn btn-white btn-animated">
+                <button
+                  onClick={() => navigate("/main")}
+                  className="btn form-btn btn-white btn-animated"
+                >
                   Home
-                </a>
+                </button>
               </div>
             </div>
           </header>
@@ -64,9 +67,12 @@ export default function Layout() {
             <div className="header-container">
               <div className="brand-box">
                 {locationLogin.pathname !== "/login" && (
-                  <a href="/login" class="btn btn-white btn-animated">
+                  <button
+                    onClick={() => navigate("/login")}
+                    className="btn form-btn btn-white btn-animated"
+                  >
                     Login
-                  </a>
+                  </button>
                 )}
               </div>
               <div className="text-box">
@@ -76,9 +82,12 @@ export default function Layout() {
                     Invoice Automation
                   </span>
                 </h1>
-                <a href="/" className="btn btn-white btn-animated">
+                <button
+                  onClick={() => navigate("/")}
+                  className="btn form-btn btn-white btn-animated"
+                >
                   Home
-                </a>
+                </button>
               </div>
             </div>
           </header>

@@ -104,9 +104,26 @@ body {
   position: relative;
 }
 
+.list-btn {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 100px;
+  transition: all 0.2s;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  max-width: 155px;
+}
+
+
+
 .form-btn-container {
   display: flex;
   justify-content: center;
+}
+.form-btn-container.btnCreateClient{
+ margin-top: 20px;
 }
 
 .form-inputs-container {
@@ -405,6 +422,10 @@ a {
 .form-errors-expanded-login {
   min-height: 475px;
 }
+
+.form-errors-expanded-create-client {
+  min-height: 820px;
+}
 .form__login {
   background-color: var(--color-primario);
   border-radius: 20px;
@@ -417,11 +438,10 @@ a {
 .form__createClient {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   background-color: var(--color-primario);
   border-radius: 20px;
   box-sizing: border-box;
-  height: 780px;
+  height: 625px;
   padding: 20px;
   width: 50%;
 }
@@ -534,6 +554,7 @@ a {
   border: solid var(--color-primario) 2px;
   padding: 15px;
   margin: 20px;
+  background-color: var(--color-primario);
 }
 
 .no-content {
@@ -541,6 +562,20 @@ a {
   justify-content: center;
   font-size: 30px;
   color: var(--color-extra);
+}
+
+.list-elements-large{
+  display: flex;
+  flex: 2;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-elements{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
 
@@ -578,12 +613,18 @@ a {
   .main-container{
     flex-direction: column;
   }
+
+  .form__createClient{
+    width: 75%;
+  }
 }
 
 @media screen and (max-width: 780px) {
   .form-title{
-    font-size: 25;
+    font-size: 25px;
   }
+
+  
 
 }
 
@@ -596,6 +637,9 @@ a {
   }
   .form__login{
     width: 85%;
+  }
+  .form__createClient{
+    width: 95%;
   }
 }
 
@@ -643,6 +687,9 @@ a {
     height: 16em;
     width: 12em;
     margin-bottom: 10%;
+  }
+  .form__createClient{
+    width: 100%;
   }
 }
 

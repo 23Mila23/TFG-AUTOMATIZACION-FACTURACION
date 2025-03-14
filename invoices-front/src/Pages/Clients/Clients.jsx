@@ -3,7 +3,7 @@ import { AppContext } from "../../Context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function ClientsMain() {
-  const { token, } = useContext(AppContext);
+  const { token } = useContext(AppContext);
   const [clients, setClients] = useState([]);
   const navigate = useNavigate();
 
@@ -18,18 +18,20 @@ export default function ClientsMain() {
       setClients(data);
     }
   }
-  async function handleDelete(id){
-    const res = await fetch(`api/clients/${id}`,{
-      method: 'delete',
-      headers:{
+  async function handleDelete(id) {
+    const res = await fetch(`api/clients/${id}`, {
+      method: "delete",
+      headers: {
         Authorization: `Bearer ${token}`,
-      }
+      },
     });
     const data = await res.json();
-    if(res.ok){
-      setClients(clients.filter((client) => {
-        return client.id != id;
-      }))
+    if (res.ok) {
+      setClients(
+        clients.filter((client) => {
+          return client.id != id;
+        })
+      );
     }
     console.log(data);
   }
@@ -40,23 +42,42 @@ export default function ClientsMain() {
     <>
       <div>
         <div className="create-client-button-container">
-            <button
-              className="button-17"
-              onClick={()=>navigate("/createclient")}
-            >Create Client</button>
+          <button
+            className="btn form-btn btn-white btn-animated"
+            onClick={() => navigate("/createclient")}
+          >
+            Create Client
+          </button>
         </div>
         {clients.length > 0 ? (
           clients.map((client) => (
             <div key={client.id}>
               <div>
                 <div className="clientList-container">
-                  <p>
+                  <p className="list-elements-large">
                     <strong>{client.name}</strong>
                   </p>
-                  <p>{client.city}</p>
-                  <p>{new Date(client.created_at).toLocaleDateString()}</p>
-                  <Link to={`/clients/edit/${client.id}`} className="button-17 clientListButton">Edit</Link>
-                    <button onClick={() => handleDelete(client.id)} className="button-17 clientListButton">Delete</button>
+                  <p className="list-elements-large">{client.city}</p>
+                  <p className="list-elements">
+                    {new Date(client.created_at).toLocaleDateString()}
+                  </p>
+                  <div className="list-elements">
+                    {" "}
+                    <Link
+                      to={`/clients/edit/${client.id}`}
+                      className="btn list-btn  btn-white btn-animated"
+                    >
+                      Edit
+                    </Link>
+                  </div>
+                  <div className="list-elements">
+                    <button
+                      onClick={() => handleDelete(client.id)}
+                      className="btn list-btn btn-white btn-animated "
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
