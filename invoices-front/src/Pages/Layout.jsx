@@ -39,7 +39,7 @@ export default function Layout() {
                 <div class="brand-box">
                   <button
                     onClick={handleLogout}
-                    className="btn btn-white btn-animated"
+                    className="btn form-btn btn-white btn-animated"
                   >
                     Logout
                   </button>

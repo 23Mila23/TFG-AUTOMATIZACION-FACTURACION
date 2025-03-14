@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
     <>
       <section class="cards-home-wrapper">
@@ -8,9 +12,13 @@ export default function Home() {
               <h1>Register</h1>
               <p>Start automating your business</p>
               <div class="tags">
-                <form action="/register">
-                  <input className="tag" type="submit" value="Register" />
-                </form>
+                <button
+                  className="tag"
+                  onClick={() => navigate("/register")}
+                  value="register"
+                >
+                  Register
+                </button>
               </div>
             </div>
           </a>

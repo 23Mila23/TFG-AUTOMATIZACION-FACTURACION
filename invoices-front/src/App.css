@@ -7,7 +7,8 @@
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -24,7 +25,7 @@ body {
   box-sizing: border-box;
   height: 100%;
 }
-.container{
+.container {
   min-height: 100vh;
   background-image: linear-gradient(
       to right bottom,
@@ -41,11 +42,11 @@ body {
   height: 100%;
 }
 
-.header-container{
+.header-container {
   display: flex;
 }
 .main {
-flex: 1;
+  flex: 1;
 }
 
 .brand-box {
@@ -93,7 +94,7 @@ flex: 1;
   transition: all 0.2s;
   position: relative;
 }
-.form-btn{
+.form-btn {
   text-transform: uppercase;
   text-decoration: none;
   padding: 10px 20px;
@@ -103,12 +104,12 @@ flex: 1;
   position: relative;
 }
 
-.form-btn-container{
+.form-btn-container {
   display: flex;
   justify-content: center;
 }
 
-.form-inputs-container{
+.form-inputs-container {
   display: flex;
   flex-direction: column;
   gap: 35px;
@@ -139,7 +140,6 @@ flex: 1;
   box-sizing: border-box;
 }
 
-
 a {
   color: inherit;
 }
@@ -155,7 +155,7 @@ a {
   width: max-content;
 }
 
-.cards-home-wrapper{
+.cards-home-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -301,44 +301,6 @@ a {
 }
 
 
-@media screen and (max-width: 1285px) {
-  .cards-wrapper {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .cards-wrapper {
-    grid-template-columns: 1fr;
-  }
-  .info {
-    justify-content: center;
-  }
-  .card-grid-space .num {
-    margin-left: 0;
-    text-align: center;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .cards-wrapper {
-    padding: 4rem 2rem;
-  }
-  .card {
-    max-width: calc(100vw - 4rem);
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .info {
-    display: block;
-    text-align: center;
-  }
-  .info h1 {
-    margin: 0;
-  }
-}
-
 
 a {
   text-decoration: none;
@@ -360,22 +322,12 @@ a {
 
 .main-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  min-height: 100vh;
-  background-color: var(--color-secundario);
 }
 
-.main-options-container {
-  display: flex;
-  width: 100%;
-  height: auto;
-  justify-content: center;
-  gap: 200px;
-}
 
 .button-17.mainButton {
   font-size: 55px;
@@ -447,10 +399,10 @@ a {
   padding: 20px;
   width: 50%;
 }
-.form-errors-expanded{
+.form-errors-expanded {
   min-height: 700px;
 }
-.form-errors-expanded-login{
+.form-errors-expanded-login {
   min-height: 475px;
 }
 .form__login {
@@ -513,7 +465,6 @@ a {
   border-radius: 12px;
   border: 0;
   box-sizing: border-box;
-  color: var(--color-texo);
   font-size: 18px;
   height: 100%;
   outline: 0;
@@ -591,3 +542,132 @@ a {
   font-size: 30px;
   color: var(--color-extra);
 }
+
+
+@media screen and (max-width: 1285px) {
+  .cards-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .cards-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .info {
+    justify-content: center;
+  }
+  .card-grid-space .num {
+    margin-left: 0;
+    text-align: center;
+  }
+  .form{
+    width: 90%;
+  }
+  .form-title{
+    font-size: 30px;
+  }
+  .form__login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 65%;
+  }
+
+  .main-container{
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .form-title{
+    font-size: 25;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+  .cards-wrapper {
+    padding: 4rem 2rem;
+  }
+  .card {
+    max-width: calc(100vw - 4rem);
+  }
+  .form__login{
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .info {
+    display: block;
+    text-align: center;
+  }
+  .info h1 {
+    margin: 0;
+  } 
+
+  .heading-primary-main{
+    font-size: 25px;
+  }
+  .heading-primary-sub{
+    font-size: 14px;
+  }
+  .brand-box{
+    padding-top: 5%;
+  }
+  .form-title{
+    font-size: 25px;
+    text-align: center;
+  }
+  .input{
+    width: 95%;
+    height: 75%;
+  }
+  .input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .form__login{
+    width: 100%;
+  }
+
+  .error{
+    text-align: center;
+  }
+
+  .card{
+    height: 16em;
+    width: 12em;
+    margin-bottom: 10%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .info {
+    display: block;
+    text-align: center;
+  }
+  .info h1 {
+    margin: 0;
+  } }
+
+  @media screen and (max-width: 360px) {
+    .info {
+      display: block;
+      text-align: center;
+    }
+    .info h1 {
+      margin: 0;
+    } 
+
+    .input{
+      height: 65%;
+      font-size: 15px;
+    }
+
+
+  }
