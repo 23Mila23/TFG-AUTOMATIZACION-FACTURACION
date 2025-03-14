@@ -38,7 +38,11 @@ export default function Login() {
   return (
     <>
       <div className="form-container">
-        <div className={`form__login ${Object.keys(errors).length > 0 ?  "form-errors-expanded-login" : ""}`}>
+        <div className={`form__login ${
+            Object.values(errors).some(error => error && error.length > 0)
+              ? "form-errors-expanded-login"
+              : ""
+          }`}>
           <div className="form-title">Login to your account</div>
           <form className="form-inputs-container" onSubmit={handleLogin}>
             <div>

@@ -39,7 +39,11 @@ export default function Register() {
   return (
     <>
       <div className="form-container">
-        <div className={`form ${Object.keys(errors).length > 0 ?  "form-errors-expanded" : ""}`}>
+        <div className={`form ${
+            Object.values(errors).some(error => error && error.length > 0)
+              ? "form-errors-expanded"
+              : ""
+          }`}>
           <div className="form-title">Registro</div>
           <form className="form-inputs-container" onSubmit={handleRegister}>
             <div>

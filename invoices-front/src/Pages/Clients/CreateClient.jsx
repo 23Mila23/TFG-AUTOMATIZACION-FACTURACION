@@ -44,7 +44,7 @@ export default function CreateClient() {
       <div className="form-container">
         <div
           className={`form__createClient ${
-            Object.keys(errors).length > 0
+            Object.values(errors).some(error => error && error.length > 0)
               ? "form-errors-expanded-create-client"
               : ""
           }`}
