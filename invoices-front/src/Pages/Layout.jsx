@@ -8,6 +8,10 @@ export default function Layout() {
   const { user, token, setUser, setToken } = useContext(AppContext);
   const navigate = useNavigate();
   const locationLogin = useLocation();
+  const location = useLocation();
+  const isCreateClientPage = location.pathname === "/createclient";
+  const isEditClientPage = /^\/clients\/edit\/\d+$/.test(location.pathname);
+  
 
   async function handleLogout(e) {
     e.preventDefault();
@@ -59,6 +63,22 @@ export default function Layout() {
                 >
                   Home
                 </button>
+                {isCreateClientPage && (
+                  <button
+                    onClick={() => navigate("/clients")}
+                    className="btn form-btn btn-white btn-animated"
+                  >
+                    View Clients
+                  </button>
+                )}
+                 {isEditClientPage && (
+                  <button
+                    onClick={() => navigate("/clients")}
+                    className="btn form-btn btn-white btn-animated"
+                  >
+                    View Clients
+                  </button>
+                )}
               </div>
             </div>
           </header>
