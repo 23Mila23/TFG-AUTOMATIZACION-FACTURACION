@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
+import Loading from "../../Components/Loading";
 
 export default function CreateClient() {
   const { token } = useContext(AppContext);
+  const [isLoading, setIsloading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,6 +21,7 @@ export default function CreateClient() {
 
   async function handleCreateClient(e) {
     e.preventDefault();
+    setIsloading(true);
     const res = await fetch("/api/clients", {
       method: "post",
       headers: {
@@ -34,17 +37,21 @@ export default function CreateClient() {
     } else {
       navigate("/clients");
     }
+    setIsloading(false);
   }
   const handleChange = (field, e) => {
     setFormData({ ...formData, [field]: e.target.value });
     setErrors({ ...errors, [field]: "" });
   };
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <>
       <div className="form-container">
         <div
           className={`form__createClient ${
-            Object.values(errors).some(error => error && error.length > 0)
+            Object.values(errors).some((error) => error && error.length > 0)
               ? "form-errors-expanded-create-client"
               : ""
           }`}

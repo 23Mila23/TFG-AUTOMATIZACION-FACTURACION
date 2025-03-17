@@ -10,7 +10,7 @@ export default function Main() {
       <div className="main-container">
         <section class="cards-home-wrapper">
           <div class="card-grid-space">
-            <a class="card" href="">
+            <a class="card" href="#">
               <div>
                 <h1>Clients</h1>
                 <p>Manage your clients</p>
@@ -30,7 +30,7 @@ export default function Main() {
 
         <section class="cards-home-wrapper">
           <div class="card-grid-space">
-            <a class="card" href="">
+            <a class="card" href="#">
               <div>
                 <h1>Invoices</h1>
                 <p>Manage your invoices</p>

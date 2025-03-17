@@ -1,13 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
+import Loading from "../../Components/Loading";
 
 export default function ClientsMain() {
   const { token } = useContext(AppContext);
   const [clients, setClients] = useState([]);
   const navigate = useNavigate();
+  const [isLoading, setIsloading] = useState(false);
+  const [isLoadingDelete, setIsloadingDelete] = useState(false);
 
   async function getClients() {
+    setIsloading(true);
     const res = await fetch("api/clients", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -17,8 +21,11 @@ export default function ClientsMain() {
     if (res.ok) {
       setClients(data);
     }
+
+    setIsloading(false);
   }
   async function handleDelete(id) {
+    setIsloadingDelete(true);
     const res = await fetch(`api/clients/${id}`, {
       method: "delete",
       headers: {
@@ -33,11 +40,15 @@ export default function ClientsMain() {
         })
       );
     }
-    console.log(data);
+    setIsloadingDelete(false);
   }
   useEffect(() => {
     getClients();
   }, []);
+
+  if (isLoading || isLoadingDelete) {
+    return <Loading />;
+  }
   return (
     <>
       <div>

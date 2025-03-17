@@ -2,10 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import SelectClient from "../../Components/SelectClient";
+import Loading from "../../Components/Loading";
 
 export default function EditInvoice() {
   const { id } = useParams();
   const { token, user } = useContext(AppContext);
+  const [isLoading, setIsloading] = useState(false);
+  const [isLoadingEdit, setIsloadingEdit] = useState(false);
 
   const navigate = useNavigate();
 
@@ -17,6 +20,7 @@ export default function EditInvoice() {
   const [errors, setErrors] = useState({});
 
   async function getInvoice() {
+    setIsloading(true);
     const res = await fetch(`/api/invoices/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -32,10 +36,12 @@ export default function EditInvoice() {
         total: data.invoice.total,
       });
     }
+    setIsloading(false);
   }
 
   async function handleEditInvoice(e) {
     e.preventDefault();
+    setIsloadingEdit(true);
     const res = await fetch(`/api/invoices/${id}`, {
       method: "put",
       headers: {
@@ -52,6 +58,7 @@ export default function EditInvoice() {
     } else {
       navigate("/invoices");
     }
+    setIsloadingEdit(false);
   }
 
   const handleChange = (field, e) => {
@@ -62,16 +69,24 @@ export default function EditInvoice() {
   useEffect(() => {
     getInvoice();
   }, []);
+  if (isLoading || isLoadingEdit) {
+    return <Loading />;
+  }
   return (
     <>
       <div className="form-container">
-        <div className={`form__editInvoice ${
-            Object.values(errors).some(error => error && error.length > 0)
+        <div
+          className={`form__editInvoice ${
+            Object.values(errors).some((error) => error && error.length > 0)
               ? "form-errors-expanded-edit-invoice"
               : ""
-          }`}>
+          }`}
+        >
           <div className="form-title">Edit Invoice</div>
-          <form className="form__editInvoice-inputs-container" onSubmit={handleEditInvoice}>
+          <form
+            className="form__editInvoice-inputs-container"
+            onSubmit={handleEditInvoice}
+          >
             <div className="input-container ic2">
               <SelectClient
                 onClientSelect={(id) =>

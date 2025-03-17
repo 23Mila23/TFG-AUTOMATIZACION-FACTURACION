@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
+import Loading from "../../Components/Loading";
 
 export default function Edit() {
   const { id } = useParams();
   const { token, user } = useContext(AppContext);
+  const [isLoading, setIsloading] = useState(false);
+  const [isLoadingEdit, setIsloadingEdit] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,6 +22,8 @@ export default function Edit() {
   const [errors, setErrors] = useState({});
 
   async function getClient() {
+    setIsloading(true);
+
     const res = await fetch(`/api/clients/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -37,10 +42,12 @@ export default function Edit() {
         CIF: data.client.CIF,
       });
     }
+    setIsloading(false);
   }
 
   async function handleEditClient(e) {
     e.preventDefault();
+    setIsloadingEdit(true);
     const res = await fetch(`/api/clients/${id}`, {
       method: "put",
       headers: {
@@ -57,6 +64,7 @@ export default function Edit() {
     } else {
       navigate("/clients");
     }
+    setIsloadingEdit(false);
   }
 
   const handleChange = (field, e) => {
@@ -67,12 +75,16 @@ export default function Edit() {
   useEffect(() => {
     getClient();
   }, []);
+
+  if (isLoading || isLoadingEdit) {
+    return <Loading />;
+  }
   return (
     <>
       <div className="form-container">
         <div
           className={`form__createClient ${
-            Object.values(errors).some(error => error && error.length > 0)
+            Object.values(errors).some((error) => error && error.length > 0)
               ? "form-errors-expanded-create-client"
               : ""
           }`}

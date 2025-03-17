@@ -1,16 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
-import {PDFDocument, rgb, StandardFonts } from "pdf-lib";
+import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import download from "downloadjs";
+import Loading from "../../Components/Loading";
 
 export default function InvoicesMain() {
   const { token } = useContext(AppContext);
   const [invoices, setInvoices] = useState([]);
   const [clients, setClients] = useState([]);
+  const [isLoadingClients, setIsloadingClients] = useState(false);
+  const [isLoadingInvoices, setIsloadingInvoices] = useState(false);
+  const [isLoadingDelete, setIsloadingDelete] = useState(false);
+  const [isLoadingDownload, setIsloadingDownload] = useState(false);
   const navigate = useNavigate();
 
   async function getInvoices() {
+    setIsloadingInvoices(true);
+
     const res = await fetch("api/invoices", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -21,9 +28,11 @@ export default function InvoicesMain() {
       setInvoices(data);
       getClients(data);
     }
+    setIsloadingInvoices(false);
   }
 
   async function getClients() {
+    setIsloadingClients(true);
     const res = await fetch("api/clients", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -34,9 +43,11 @@ export default function InvoicesMain() {
     if (res.ok) {
       setClients(clientsData);
     }
+    setIsloadingClients(false);
   }
 
   async function handleDelete(id) {
+    setIsloadingDelete(true);
     const res = await fetch(`api/invoices/${id}`, {
       method: "delete",
       headers: {
@@ -51,10 +62,11 @@ export default function InvoicesMain() {
         })
       );
     }
-    console.log(data);
+    setIsloadingDelete(false);
   }
 
   const handleDownload = async (invoice) => {
+    setIsloadingDownload(true);
     const client = findClientDataById(invoice.client_id);
     const date = new Date(invoice.created_at).toLocaleDateString("es-ES");
     const existingPdfBytes = await fetch("plantilla.pdf").then((res) =>
@@ -71,7 +83,7 @@ export default function InvoicesMain() {
       y: 748,
       size: 12,
       font: helveticaFont,
-      color: rgb(0,0,0),
+      color: rgb(0, 0, 0),
     });
 
     firstPage.drawText(`${date}`, {
@@ -79,7 +91,7 @@ export default function InvoicesMain() {
       y: 721,
       size: 12,
       font: helveticaFont,
-      color: rgb(0,0,0),
+      color: rgb(0, 0, 0),
     });
 
     firstPage.drawText(`${client.name}`, {
@@ -87,14 +99,14 @@ export default function InvoicesMain() {
       y: 720,
       size: 12,
       font: helveticaFont,
-      color: rgb(0,0,0),
+      color: rgb(0, 0, 0),
     });
     firstPage.drawText(`${client.adress}`, {
       x: 350,
       y: 707,
       size: 12,
       font: helveticaFont,
-      color: rgb(0,0,0),
+      color: rgb(0, 0, 0),
     });
 
     firstPage.drawText(`${client.postalCode}`, {
@@ -102,7 +114,7 @@ export default function InvoicesMain() {
       y: 695,
       size: 12,
       font: helveticaFont,
-      color: rgb(0,0,0),
+      color: rgb(0, 0, 0),
     });
 
     firstPage.drawText(`${client.city}`, {
@@ -110,25 +122,26 @@ export default function InvoicesMain() {
       y: 683,
       size: 12,
       font: helveticaFont,
-      color: rgb(0,0,0),
+      color: rgb(0, 0, 0),
     });
     firstPage.drawText(`${client.CIF}`, {
       x: 350,
       y: 670,
       size: 12,
       font: helveticaFont,
-      color: rgb(0,0,0),
+      color: rgb(0, 0, 0),
     });
     firstPage.drawText(`${invoice.total}€`, {
       x: 515,
       y: 107,
       size: 12,
       font: helveticaFont,
-      color: rgb(0,0,0),
+      color: rgb(0, 0, 0),
     });
 
     const pdfBytes = await pdfDoc.save();
     download(pdfBytes, "pdf-lib_modification_example.pdf", "application/pdf");
+    setIsloadingDownload(false);
   };
 
   const findClientDataById = (id) => {
@@ -140,6 +153,15 @@ export default function InvoicesMain() {
   useEffect(() => {
     getInvoices();
   }, []);
+
+  if (
+    isLoadingClients ||
+    isLoadingInvoices ||
+    isLoadingDelete ||
+    isLoadingDownload
+  ) {
+    return <Loading />;
+  }
   return (
     <>
       <div>
@@ -163,26 +185,25 @@ export default function InvoicesMain() {
                   <p>Total Amount: {invoice.total}</p>
                   <p>{new Date(invoice.created_at).toLocaleDateString()}</p>
                   <div className="invoices-button-container">
-                  <Link
-                    to={`/invoices/edit/${invoice.id}`}
-                    className="btn form-btn btn-white btn-animated"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    className="btn form-btn btn-white btn-animated"
-                    onClick={() => handleDownload(invoice)}
-                  >
-                    Download
-                  </button>
-                  <button
-                    onClick={() => handleDelete(invoice.id)}
-                    className="btn form-btn btn-white btn-animated"
-                  >
-                    Delete
-                  </button>
+                    <Link
+                      to={`/invoices/edit/${invoice.id}`}
+                      className="btn form-btn btn-white btn-animated"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      className="btn form-btn btn-white btn-animated"
+                      onClick={() => handleDownload(invoice)}
+                    >
+                      Download
+                    </button>
+                    <button
+                      onClick={() => handleDelete(invoice.id)}
+                      className="btn form-btn btn-white btn-animated"
+                    >
+                      Delete
+                    </button>
                   </div>
-                 
                 </div>
               </div>
             </div>

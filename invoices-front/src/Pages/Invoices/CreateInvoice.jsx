@@ -2,9 +2,11 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import SelectClient from "../../Components/SelectClient";
+import Loading from "../../Components/Loading";
 
 export default function CreateInvoice() {
   const { token } = useContext(AppContext);
+  const [isLoading, setIsloading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -17,6 +19,7 @@ export default function CreateInvoice() {
 
   async function handleCreateInvoice(e) {
     e.preventDefault();
+    setIsloading(true);
     const res = await fetch("/api/invoices", {
       method: "post",
       headers: {
@@ -32,11 +35,15 @@ export default function CreateInvoice() {
     } else {
       navigate("/invoices");
     }
+    setIsloading(false);
   }
   const handleChange = (field, e) => {
     setFormData({ ...formData, [field]: e.target.value });
     setErrors({ ...errors, [field]: "" });
   };
+  if (isLoading) {
+      return <Loading />;
+    }
   return (
     <>
       <div className="form-container">

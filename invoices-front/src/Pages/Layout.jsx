@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
+import Loading from "../Components/Loading";
 
-export default function Layout() {
+export default function Layout({userIsLoading}) {
   const { user, token, setUser, setToken } = useContext(AppContext);
   const navigate = useNavigate();
   const locationLogin = useLocation();
@@ -131,7 +132,7 @@ export default function Layout() {
           </header>
         )}
         <main className="main">
-          <Outlet />
+          {userIsLoading ? <Loading /> : <Outlet />}
         </main>
       </div>
     </>
