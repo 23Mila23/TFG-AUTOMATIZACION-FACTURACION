@@ -145,7 +145,7 @@ export default function InvoicesMain() {
       <div>
         <div className="create-client-button-container">
           <button
-            className="button-17"
+            className="btn form-btn btn-white btn-animated"
             onClick={() => navigate("/createinvoice")}
           >
             New Invoice
@@ -155,31 +155,34 @@ export default function InvoicesMain() {
           invoices.map((invoice) => (
             <div key={invoice.id}>
               <div>
-                <div className="clientList-container">
+                <div className="invoiceList-container">
                   <p>
                     <strong>Invoice Number: {invoice.id}</strong>
                   </p>
                   <p>Client: {findClientDataById(invoice.client_id)?.name}</p>
                   <p>Total Amount: {invoice.total}</p>
                   <p>{new Date(invoice.created_at).toLocaleDateString()}</p>
+                  <div className="invoices-button-container">
                   <Link
                     to={`/invoices/edit/${invoice.id}`}
-                    className="button-17 clientListButton"
+                    className="btn form-btn btn-white btn-animated"
                   >
                     Edit
                   </Link>
                   <button
-                    className="button-17 clientListButton"
+                    className="btn form-btn btn-white btn-animated"
                     onClick={() => handleDownload(invoice)}
                   >
                     Download
                   </button>
                   <button
                     onClick={() => handleDelete(invoice.id)}
-                    className="button-17 clientListButton"
+                    className="btn form-btn btn-white btn-animated"
                   >
                     Delete
                   </button>
+                  </div>
+                 
                 </div>
               </div>
             </div>
