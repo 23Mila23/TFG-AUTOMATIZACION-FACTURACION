@@ -10,7 +10,9 @@ export default function Layout() {
   const locationLogin = useLocation();
   const location = useLocation();
   const isCreateClientPage = location.pathname === "/createclient";
+  const isCreateInvoicePage = location.pathname === "/createinvoice";
   const isEditClientPage = /^\/clients\/edit\/\d+$/.test(location.pathname);
+  const isEditInvoicePage = /^\/invoices\/edit\/\d+$/.test(location.pathname);
   
 
   async function handleLogout(e) {
@@ -77,6 +79,22 @@ export default function Layout() {
                     className="btn form-btn btn-white btn-animated"
                   >
                     View Clients
+                  </button>
+                )}
+                {isCreateInvoicePage && (
+                  <button
+                    onClick={() => navigate("/invoices")}
+                    className="btn form-btn btn-white btn-animated"
+                  >
+                    View Invoices
+                  </button>
+                )}
+                {isEditInvoicePage && (
+                  <button
+                    onClick={() => navigate("/invoices")}
+                    className="btn form-btn btn-white btn-animated"
+                  >
+                    View invoices
                   </button>
                 )}
               </div>
