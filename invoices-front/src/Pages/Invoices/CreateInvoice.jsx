@@ -40,9 +40,13 @@ export default function CreateInvoice() {
   return (
     <>
       <div className="form-container">
-        <div className="form__createInvoice">
+        <div className={`form__createInvoice ${
+            Object.values(errors).some(error => error && error.length > 0)
+              ? "form-errors-expanded-create-invoice"
+              : ""
+          }`}>
           <div className="form-title">New Invoice</div>
-          <form className="form-container" onSubmit={handleCreateInvoice}>
+          <form className="form__createInvoice-button-container" onSubmit={handleCreateInvoice}>
             <div className="input-container ic2">
               <SelectClient
                 onClientSelect={(id) =>
@@ -66,8 +70,11 @@ export default function CreateInvoice() {
               />
             </div>
             {errors.total ? <p className="error">{errors.total[0]}</p> : ""}
-
-            <button className="submit">Submit</button>
+            <div>
+              <button className="btn form-btn btn-white btn-animated">
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       </div>
