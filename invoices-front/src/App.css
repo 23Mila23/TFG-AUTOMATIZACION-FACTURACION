@@ -116,14 +116,12 @@ body {
   max-width: 155px;
 }
 
-
-
 .form-btn-container {
   display: flex;
   justify-content: center;
 }
-.form-btn-container.btnCreateClient{
- margin-top: 20px;
+.form-btn-container.btnCreateClient {
+  margin-top: 20px;
 }
 
 .form-inputs-container {
@@ -317,8 +315,6 @@ a {
   font-weight: normal;
 }
 
-
-
 a {
   text-decoration: none;
   color: inherit;
@@ -344,7 +340,6 @@ a {
   width: 100%;
   height: 100%;
 }
-
 
 .button-17.mainButton {
   font-size: 55px;
@@ -431,7 +426,11 @@ a {
   min-height: 535px;
 }
 
-.css-b62m3t-container{
+.form-errors-expanded-edit-invoice {
+  min-height: 460px;
+}
+
+.css-b62m3t-container {
   color: black;
 }
 .form__login {
@@ -466,11 +465,30 @@ a {
   width: 50%;
 }
 
-.form__createInvoice-button-container{
+.form__createInvoice-button-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+}
+
+.form__editInvoice {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-primario);
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: 450px;
+  padding: 20px;
+  width: 50%;
+  justify-content: center;
+}
+
+.form__editInvoice-inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 }
 
 .form-title {
@@ -582,9 +600,9 @@ a {
   background-color: var(--color-primario);
 }
 
-.invoices-button-container{
-display: flex;
-gap: 25px;
+.invoices-button-container {
+  display: flex;
+  gap: 25px;
 }
 
 .no-content {
@@ -594,20 +612,19 @@ gap: 25px;
   color: var(--color-extra);
 }
 
-.list-elements-large{
+.list-elements-large {
   display: flex;
   flex: 2;
   align-items: center;
   justify-content: center;
 }
 
-.list-elements{
+.list-elements {
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1;
 }
-
 
 @media screen and (max-width: 1285px) {
   .cards-wrapper {
@@ -626,13 +643,13 @@ gap: 25px;
     margin-left: 0;
     text-align: center;
   }
-  .form{
+  .form {
     width: 90%;
   }
-  .form-title{
+  .form-title {
     font-size: 30px;
   }
-  .form__login{
+  .form__login {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -640,51 +657,53 @@ gap: 25px;
     width: 65%;
   }
 
-  .main-container{
+  .main-container {
     flex-direction: column;
   }
 
-  .form__createClient{
+  .form__createClient {
     width: 75%;
   }
 
   .clientList-container {
-    width: 95%; 
-    margin: 10px auto; 
+    width: 95%;
+    margin: 10px auto;
     padding: 10px;
     gap: 15px;
   }
 
-  .invoiceList-container{
+  .invoiceList-container {
     gap: 20px;
   }
 
-  .form__createInvoice{
+  .form__createInvoice {
+    width: 75%;
+  }
+
+  .form__editInvoice {
     width: 75%;
   }
 }
 
 @media screen and (max-width: 780px) {
-  .form-title{
+  .form-title {
     font-size: 25px;
   }
-  .invoiceList-container{
+  .invoiceList-container {
     gap: 10px;
-    p{
+    p {
       font-size: 12px;
     }
-    a{
+    a {
       font-size: 10px;
     }
-    button{
+    button {
       font-size: 10px;
     }
-    .invoices-button-container{
+    .invoices-button-container {
       gap: 5px;
     }
   }
-  
-
 }
 
 @media screen and (max-width: 600px) {
@@ -694,24 +713,26 @@ gap: 25px;
   .card {
     max-width: calc(100vw - 4rem);
   }
-  .form__login{
+  .form__login {
     width: 85%;
   }
-  .form__createClient{
+  .form__createClient {
     width: 95%;
   }
 
-  .invoiceList-container{
+  .invoiceList-container {
     gap: 5px;
     flex-wrap: wrap;
     justify-content: center;
   }
 
-  .form__createInvoice{
+  .form__createInvoice {
     width: 100%;
   }
 
- 
+  .form__editInvoice {
+    width: 90%;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -721,70 +742,77 @@ gap: 25px;
   }
   .info h1 {
     margin: 0;
-  } 
+  }
 
-  .heading-primary-main{
+  .heading-primary-main {
     font-size: 25px;
   }
-  .heading-primary-sub{
+  .heading-primary-sub {
     font-size: 14px;
   }
-  .brand-box{
+  .brand-box {
     padding-top: 5%;
   }
-  .form-title{
+  .form-title {
     font-size: 25px;
     text-align: center;
   }
-  .input{
+  .input {
     width: 95%;
     height: 75%;
   }
-  .input-container{
+  .input-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  .form__login{
+  .form__login {
     width: 100%;
   }
 
-  .error{
+  .error {
     text-align: center;
   }
 
-  .card{
+  .card {
     height: 16em;
     width: 12em;
     margin-bottom: 10%;
   }
-  .form__createClient{
+  .form__createClient {
     width: 100%;
   }
 
   .clientList-container {
-    width: 90%; 
+    width: 90%;
     gap: 0px;
   }
-  .list-elements-large{
+  .list-elements-large {
     font-size: 15px;
     flex: 0;
   }
-  .list-elements{
+  .list-elements {
     flex: 0;
     font-size: 15px;
   }
-  .list-elements a{
+  .list-elements a {
     width: 65px;
     font-size: 12px;
   }
-  .list-elements button{
+  .list-elements button {
     font-size: 12px;
     width: 72px;
   }
 
-  .form__createInvoice-button-container .input-container{
+  .form__createInvoice-button-container .input-container {
+    align-items: normal;
+  }
+  .form__editInvoice {
+    width: 100%;
+  }
+
+  .form__editInvoice-inputs-container .input-container {
     align-items: normal;
   }
 }
@@ -799,39 +827,36 @@ gap: 25px;
   }
 
   .clientList-container {
-    width: 95%; 
+    width: 95%;
   }
 
-  .list-elements-large{
+  .list-elements-large {
     font-size: 12px;
   }
-  .list-elements{
+  .list-elements {
     font-size: 12px;
   }
-  .list-elements a{
+  .list-elements a {
     width: 65px;
     font-size: 12px;
   }
-  .list-elements button{
+  .list-elements button {
     font-size: 12px;
     width: 72px;
   }
-
 }
 
-  @media screen and (max-width: 360px) {
-    .info {
-      display: block;
-      text-align: center;
-    }
-    .info h1 {
-      margin: 0;
-    } 
-
-    .input{
-      height: 65%;
-      font-size: 15px;
-    }
-
-
+@media screen and (max-width: 360px) {
+  .info {
+    display: block;
+    text-align: center;
   }
+  .info h1 {
+    margin: 0;
+  }
+
+  .input {
+    height: 65%;
+    font-size: 15px;
+  }
+}

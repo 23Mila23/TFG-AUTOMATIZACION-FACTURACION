@@ -65,9 +65,13 @@ export default function EditInvoice() {
   return (
     <>
       <div className="form-container">
-        <div className="form__createClient">
+        <div className={`form__editInvoice ${
+            Object.values(errors).some(error => error && error.length > 0)
+              ? "form-errors-expanded-edit-invoice"
+              : ""
+          }`}>
           <div className="form-title">Edit Invoice</div>
-          <form onSubmit={handleEditInvoice}>
+          <form className="form__editInvoice-inputs-container" onSubmit={handleEditInvoice}>
             <div className="input-container ic2">
               <SelectClient
                 onClientSelect={(id) =>
@@ -91,7 +95,11 @@ export default function EditInvoice() {
               />
             </div>
             {errors.total ? <p className="error">{errors.total[0]}</p> : ""}
-            <button className="submit">Edit</button>
+            <div>
+              <button className="btn form-btn btn-white btn-animated">
+                Edit
+              </button>
+            </div>
           </form>
         </div>
       </div>
