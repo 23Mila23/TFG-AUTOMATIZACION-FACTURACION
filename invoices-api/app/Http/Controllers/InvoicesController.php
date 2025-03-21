@@ -11,9 +11,9 @@ class InvoicesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Invoices::all();
+        return $request->user()->invoices()->get();
     }
 
     /**
